@@ -20,6 +20,8 @@ namespace MudioGames.Showcase.GamePlay
         private float vertical;
         private float horizontal;
 
+        private float _bulletDistance = 4;
+
         private Dictionary<CommandType, IBehaviourCommand> _moveCommands = new Dictionary<CommandType, IBehaviourCommand>();
 
         private void Start()
@@ -27,7 +29,13 @@ namespace MudioGames.Showcase.GamePlay
             _controller = GetComponent<CharacterController>();
             _moveCommands.Add(CommandType.Move, new BehaviourCommand(() => Move()));
             _moveCommands.Add(CommandType.Shoot, new BehaviourCommand(() => Shoot()));
+            MessageBus.Subscribe<LevelProgressed>((x)=> OnLevelProgressed(x.Value));
 
+        }
+
+        private void OnLevelProgressed(int value)
+        {
+            _bulletDistance += 0.5f;
         }
 
         public void SetSpeed(float value)
@@ -69,7 +77,7 @@ namespace MudioGames.Showcase.GamePlay
             _allowShoot = false;
             
             _bullet.ShootPosition = _bullet.transform.position;
-            _bullet.ShootEndPosition = _bullet.ShootPosition + transform.forward * 4;
+            _bullet.ShootEndPosition = _bullet.ShootPosition + transform.forward * _bulletDistance;
             _bullet.transform.DOMove(_bullet.ShootEndPosition , 0.5f)
                           .SetEase(Ease.Linear)
                           .OnComplete(() =>

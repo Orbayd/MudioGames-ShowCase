@@ -17,8 +17,6 @@ public class ResourceConfig : ScriptableObject
 
     public int  MaxActorCount;
     public int MinAICount;
-    
-    public float ActorSpeed;
     public Vector2 SpawnPositionBounds;
 
 }

@@ -35,7 +35,7 @@ namespace MudioGames.Showcase.Services
             var positionBounds = _resourceConfig.SpawnPositionBounds;
             var pooledObject = PoolingService.Spawn(new Vector3(randomValue.x * positionBounds.x, _resourceConfig.PlayerSpawnPosition.y, randomValue.y * positionBounds.y), Vector3.zero);
             var agent = pooledObject.GetComponent<Actor>();
-            agent.SetSpeed(_resourceConfig.ActorSpeed,level);
+            agent.SetSpeed(level);
             _actors.Add(pooledObject);
         }
 

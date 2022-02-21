@@ -9,12 +9,16 @@ public class ResourceConfig : ScriptableObject
     public GameObject PlayerPrefab;
 
     public Vector3 PlayerSpawnPosition;
+
+    public float PlayerSpeed;
    
-    [Header("Prize")]
-    public GameObject PrizePrefab;
+    [Header("AI")]
+    public GameObject AIPrefab;
 
-    public int  PrizeCount;
-
+    public int  MaxActorCount;
+    public int MinAICount;
+    
+    public float ActorSpeed;
     public Vector2 SpawnPositionBounds;
 
 }

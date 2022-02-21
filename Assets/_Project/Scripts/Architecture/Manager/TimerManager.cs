@@ -34,10 +34,13 @@ namespace MudioGames.Showcase.Managers
             private event Action _onTimerEnd;
             private event Action _onTimerTick;
 
+            private float _speed;
+
             public Timer(float duration)
             {
                 Duration = duration;
                 IsFinished = false;
+                _speed = 1;
             }
             public Timer SetTimerEnd(Action timerEnd)
             {
@@ -56,6 +59,12 @@ namespace MudioGames.Showcase.Managers
                 return this;
             }
 
+            public Timer SetTimeSpeed(float value)
+            {
+                _speed = value;
+                return this;
+            }
+
             public void Update(float elapsedTime)
             {
                 if(IsFinished)
@@ -64,7 +73,7 @@ namespace MudioGames.Showcase.Managers
                 }
                 _onTimerTick?.Invoke();
 
-                Duration -= elapsedTime;
+                Duration -= elapsedTime * _speed;
                 if (Duration <= 0)
                 {
                     _onTimerEnd?.Invoke();

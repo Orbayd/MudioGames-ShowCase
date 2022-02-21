@@ -66,6 +66,5 @@ namespace MudioGames.Showcase.Services
             }
             return false;
         }
-
     }
 }

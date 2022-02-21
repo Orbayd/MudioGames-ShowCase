@@ -15,7 +15,10 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 1487017850061926366, guid: 1592fc9fbf19445f8a8ec5436dfe210f,
     type: 3}
   PlayerSpawnPosition: {x: 0, y: 0.9, z: -18}
-  PrizePrefab: {fileID: 7284077733067358955, guid: bdd5be7171f474410a8fc1c849bfceb7,
+  PlayerSpeed: 0.1
+  AIPrefab: {fileID: 7284077733067358955, guid: bdd5be7171f474410a8fc1c849bfceb7,
     type: 3}
-  PrizeCount: 5
-  SpawnPositionBounds: {x: 15, y: 15}
+  MaxActorCount: 10
+  MinAICount: 4
+  ActorSpeed: 1
+  SpawnPositionBounds: {x: 18, y: 18}

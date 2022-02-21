@@ -14,23 +14,18 @@ namespace MudioGames.Showcase.GamePlay
         void Start()
         {
             _agent ??= GetComponent<NavMeshAgent>();
-
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public void Move(Vector3 targetDestination)
         {
             _agent.SetDestination(targetDestination);
-
             var randomDestination = Random.insideUnitCircle * 18;
-            GameManager.Singleton.TimerManager.Register(5, () => Move(new Vector3(randomDestination.x, this.transform.position.y, randomDestination.y)),()=>{});
+            // GameManager.Singleton.TimerManager.Register(5, () => Move(new Vector3(randomDestination.x, this.transform.position.y, randomDestination.y)),()=>{});
         }
-      
+
+        public void SetSpeed(float inital , int level)
+        {
+            _agent.speed += inital *  Mathf.Clamp(0.1f * level, 0.1f,1);
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace MudioGames.Showcase.Managers
 
         public static GameManager Singleton {get; private set;}
 
+        private int _level = 1;
         private int _score;
         private int Score { get { return _score; } set { _score = value; OnScoreValueChanged(); } }
 
@@ -77,15 +78,24 @@ namespace MudioGames.Showcase.Managers
         private void GiveReward(GameObject gameObject)
         {
             _resourceService.Release(gameObject);
-            _timerManager.Register(Random.Range(1, 5), () => _resourceService.CreatePrize(),()=>{ });
-
             Score += _gameConfig.ScoreGain;
             _mainTimer.AddDuration(Random.Range(2,5));
 
-            if (Score >= _gameConfig.MaxScore)
+            if(_resourceService.IsAllReleased())
             {
-                GameEnd();
+                PrepareNextLevel();
             }
+
+        }
+
+        private void PrepareNextLevel()
+        {
+            _level++;
+            _resourceService.ReleaseAll();
+            _resourceService.CreateActors(Mathf.Clamp(_level + 3, 1, 10), _level);
+            _mainTimer.SetTimeSpeed(1 + (_level * 0.1f));
+
+            MessageBus.Publish<LevelProgressed>(new LevelProgressed(_level));
         }
 
         private void GameEnd()
@@ -98,9 +108,9 @@ namespace MudioGames.Showcase.Managers
             _uiManager.Navigate(ViewName.ScoreBoard);
             Score = 0;
             _resourceService.ResetPlayer();
-            _resourceService.CreatePrizes();
+            _resourceService.CreateActors(4,_level);
 
-           _mainTimer = _timerManager.Register(60, () => GameEnd() , () => { Debug.Log("Hello"); OnTimeTick();});
+           _mainTimer = _timerManager.Register(60, () => GameEnd() , () => { OnTimeTick();});
         }
 
         private void OnScoreValueChanged()

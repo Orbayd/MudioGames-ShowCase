@@ -1,4 +1,5 @@
-﻿using MudioGames.Showcase.Events;
+﻿using System;
+using MudioGames.Showcase.Events;
 using MudioGames.Showcase.Helpers;
 
 namespace MudioGames.Showcase.UI
@@ -31,9 +32,29 @@ namespace MudioGames.Showcase.UI
                 NotifyPropertyChanged();
             }
         }
-        private void OnGiveRewards(int value)
+
+        public int _level;
+        public int Level
+        {
+            get
+            {
+                return _level;
+            }
+            set
+            {
+                _level = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private void OnScoreChanged(int value)
         {
             Score = value;
+        }
+
+        private void OnLevelChanged(int value)
+        {
+            Level = value;
         }
 
         private void OnTimeTick(int value)
@@ -46,6 +67,7 @@ namespace MudioGames.Showcase.UI
             AddEvents();
         }
 
+
         public override void OnUnBind()
         {
             RemoveEvents();
@@ -53,8 +75,9 @@ namespace MudioGames.Showcase.UI
 
         public void AddEvents()
         {
-            MessageBus.Subscribe<GiveRewardEvent>((x)=> OnGiveRewards(x.Value));
+            MessageBus.Subscribe<GiveRewardEvent>((x)=> OnLevelChanged(x.Value));
             MessageBus.Subscribe<TimeLeftEvent>((x)=> OnTimeTick(x.Value));
+            MessageBus.Subscribe<LevelProgressed>((x)=> OnLevelChanged(x.Value));
         }
 
 
@@ -62,6 +85,7 @@ namespace MudioGames.Showcase.UI
         {
            MessageBus.UnSubscribe<GiveRewardEvent>();
            MessageBus.UnSubscribe<TimeLeftEvent>();
+           MessageBus.UnSubscribe<LevelProgressed>();
         }
     }
 }

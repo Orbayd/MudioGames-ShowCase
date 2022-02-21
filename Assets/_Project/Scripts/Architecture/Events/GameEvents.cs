@@ -33,4 +33,15 @@ namespace MudioGames.Showcase.Events
             Value = value;
         }
     }
+
+    public class LevelProgressed
+    {
+        public int Value { get; private set; }
+
+        public LevelProgressed(int value)
+        {
+            Value = value;
+        }
+
+    }
 }

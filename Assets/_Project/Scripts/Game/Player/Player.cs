@@ -15,10 +15,11 @@ namespace MudioGames.Showcase.GamePlay
         private CharacterController _controller;
 
         [SerializeField]
-        Transform _bullet;
-
-        float vertical;
-        float horizontal;
+        private Transform _bullet;
+        private Tweener _transitionTweener;
+        private bool _allowShoot = true;
+        private float vertical;
+        private float horizontal;
 
         private Dictionary<CommandType, IBehaviourCommand> _moveCommands = new Dictionary<CommandType, IBehaviourCommand>();
 
@@ -28,6 +29,11 @@ namespace MudioGames.Showcase.GamePlay
             _moveCommands.Add(CommandType.Move, new BehaviourCommand(() => Move()));
             _moveCommands.Add(CommandType.Shoot, new BehaviourCommand(() => Shoot()));
 
+        }
+
+        public void SetSpeed(float value)
+        {
+            _speed = value;
         }
 
         private void FixedUpdate()
@@ -54,9 +60,7 @@ namespace MudioGames.Showcase.GamePlay
             transform.Rotate(new Vector3(0, vertical * 3, 0), Space.Self);
 
         }
-        private Tweener _transitionTweener;
-        private bool _allowShoot = true;
-
+       
         private void Shoot()
         {
             if (!_allowShoot)
@@ -73,12 +77,16 @@ namespace MudioGames.Showcase.GamePlay
                                           .OnComplete(() =>
                                           {
                                               var distance = Vector3.Distance(_bullet.transform.position, BulletPosition());
-                                              if (distance > 0.5f)
+                                              if (distance > 1.5f)
                                               {
                                                   StepRestart();
                                               }
-                                              Debug.Log("Tween Completed");
-                                              _allowShoot = true;
+                                              else
+                                              {
+                                                  Debug.Log("Tween Completed");
+                                                  _allowShoot = true;
+                                                  _bullet.transform.position = BulletPosition();
+                                              }
                                           })
                                           .SetAutoKill(false);
                           });

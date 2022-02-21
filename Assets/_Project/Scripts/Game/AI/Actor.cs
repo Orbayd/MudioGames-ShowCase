@@ -26,6 +26,10 @@ namespace MudioGames.Showcase.GamePlay
 
         public void Move(Vector3 targetDestination)
         {
+            if(_agent.hasPath)
+            {
+                return;
+            }
             _agent.SetDestination(targetDestination);
         }
 

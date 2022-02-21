@@ -10,12 +10,11 @@ namespace MudioGames.Showcase.GamePlay
     [RequireComponent(typeof(CharacterController))]
     public class Player : MonoBehaviour
     {
+     
         [SerializeField]
+        private Bullet _bullet;
         private float _speed;
         private CharacterController _controller;
-
-        [SerializeField]
-        private Transform _bullet;
         private Tweener _transitionTweener;
         private bool _allowShoot = true;
         private float vertical;
@@ -68,7 +67,10 @@ namespace MudioGames.Showcase.GamePlay
                 return;
             }
             _allowShoot = false;
-            _bullet.transform.DOMove(this.transform.position + transform.forward * 4, 0.5f)
+            
+            _bullet.ShootPosition = _bullet.transform.position;
+            _bullet.ShootEndPosition = _bullet.ShootPosition + transform.forward * 4;
+            _bullet.transform.DOMove(_bullet.ShootEndPosition , 0.5f)
                           .SetEase(Ease.Linear)
                           .OnComplete(() =>
                           {

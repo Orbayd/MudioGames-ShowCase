@@ -75,10 +75,10 @@ namespace MudioGames.Showcase.Managers
             follow.SetOffset(_gameConfig.CameraOffset);
         }
 
-        private void GiveReward(GameObject gameObject)
+        private void GiveReward(GameObject gameObject, int score)
         {
             _resourceService.Release(gameObject);
-            Score += _gameConfig.ScoreGain;
+            Score += score;
             _mainTimer.AddDuration(Random.Range(2,5));
 
             if(_resourceService.IsAllReleased())
@@ -115,7 +115,7 @@ namespace MudioGames.Showcase.Managers
 
         private void OnScoreValueChanged()
         {
-            MessageBus.Publish<GiveRewardEvent>(new GiveRewardEvent(_score));
+            MessageBus.Publish<GiveRewardEvent>(new GiveRewardEvent(Score));
         }
 
         private void OnTimeTick()
@@ -126,7 +126,7 @@ namespace MudioGames.Showcase.Managers
         private void AddEvents()
         {
             MessageBus.Subscribe<GameStartEvent>((x) => GameStart());
-            MessageBus.Subscribe<PrepareRewardEvent>((x) => GiveReward(x.Prize));
+            MessageBus.Subscribe<PrepareRewardEvent>((x) => GiveReward(x.Actor, (int)x.Score));
         }
 
         private void RemoveEvents()

@@ -131,7 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 0.1
-  _bullet: {fileID: 6925708809468926386}
+  _bullet: {fileID: 1501803400861006882}
 --- !u!1 &1487017850507389165
 GameObject:
   m_ObjectHideFlags: 0
@@ -322,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56b947c2d32584624ab615e30f6de91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootPosition: {x: 0, y: 0, z: 0}
 --- !u!54 &6030890010344816831
 Rigidbody:
   m_ObjectHideFlags: 0

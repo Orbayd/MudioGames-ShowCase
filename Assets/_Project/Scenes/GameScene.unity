@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _txtScore: {fileID: 1918986939}
   _txtTime: {fileID: 98344562}
-  _txtLevel: {fileID: 0}
+  _txtLevel: {fileID: 1913467426}
 --- !u!114 &954197362
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -75,7 +75,7 @@ namespace MudioGames.Showcase.UI
 
         public void AddEvents()
         {
-            MessageBus.Subscribe<GiveRewardEvent>((x)=> OnLevelChanged(x.Value));
+            MessageBus.Subscribe<GiveRewardEvent>((x)=> OnScoreChanged(x.Value));
             MessageBus.Subscribe<TimeLeftEvent>((x)=> OnTimeTick(x.Value));
             MessageBus.Subscribe<LevelProgressed>((x)=> OnLevelChanged(x.Value));
         }

@@ -19,7 +19,7 @@ namespace MudioGames.Showcase.GamePlay
         public void Move(Vector3 targetDestination)
         {
             _agent.SetDestination(targetDestination);
-            var randomDestination = Random.insideUnitCircle * 18;
+            //var randomDestination = Random.insideUnitCircle * 18;
             // GameManager.Singleton.TimerManager.Register(5, () => Move(new Vector3(randomDestination.x, this.transform.position.y, randomDestination.y)),()=>{});
         }
 

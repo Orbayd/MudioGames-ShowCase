@@ -8,11 +8,13 @@ namespace MudioGames.Showcase.Events
 
     public class PrepareRewardEvent 
     {
-        public GameObject Prize {get; private set;}
+        public GameObject Actor {get; private set;}
+        public float Score {get; private set;}
 
-        public PrepareRewardEvent(GameObject prize)
+        public PrepareRewardEvent(GameObject actor, float score)
         {
-            Prize = prize;
+            Actor = actor;
+            Score = score;
         }
     }
     public class GiveRewardEvent 

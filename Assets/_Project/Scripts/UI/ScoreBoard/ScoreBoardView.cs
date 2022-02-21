@@ -31,7 +31,7 @@ namespace MudioGames.Showcase.UI
 
                  if(property.PropertyName.Equals(nameof(model.Level)))
                 {
-                    _txtTime.text = "Level: " +  model.Level.ToString();
+                    _txtLevel.text = "Level: " +  model.Level.ToString();
                 }
             };
         }

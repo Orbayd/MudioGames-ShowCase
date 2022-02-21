@@ -20,7 +20,7 @@ namespace MudioGames.Showcase.GamePlay
         private float vertical;
         private float horizontal;
 
-        private float _bulletDistance = 4;
+        private float _bulletDistance = 3;
 
         private Dictionary<CommandType, IBehaviourCommand> _moveCommands = new Dictionary<CommandType, IBehaviourCommand>();
 
@@ -33,9 +33,9 @@ namespace MudioGames.Showcase.GamePlay
 
         }
 
-        private void OnLevelProgressed(int value)
+        private void OnLevelProgressed(int level)
         {
-            _bulletDistance = Mathf.Clamp(_bulletDistance + 0.5f,3,10);
+            _bulletDistance = Mathf.Clamp(3 + level * 0.5f,3,10);
         }
 
         public void SetSpeed(float value)

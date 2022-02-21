@@ -107,8 +107,10 @@ namespace MudioGames.Showcase.Managers
         {
             _uiManager.Navigate(ViewName.ScoreBoard);
             Score = 0;
+            _level = 0;
             _resourceService.ResetPlayer();
             _resourceService.CreateActors(4,_level);
+            MessageBus.Publish<LevelProgressed>(new LevelProgressed(_level));
 
            _mainTimer = _timerManager.Register(60, () => GameEnd() , () => { OnTimeTick();});
         }

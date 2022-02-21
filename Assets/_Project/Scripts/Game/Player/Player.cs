@@ -35,7 +35,7 @@ namespace MudioGames.Showcase.GamePlay
 
         private void OnLevelProgressed(int value)
         {
-            _bulletDistance += 0.5f;
+            _bulletDistance = Mathf.Clamp(_bulletDistance + 0.5f,3,10);
         }
 
         public void SetSpeed(float value)
